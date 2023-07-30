@@ -1,0 +1,26 @@
+.home {
+  margin: auto;
+  max-width: 1250px;
+  min-height: 100vh;
+  padding: 50px 10px 150px;
+  &__headline {
+    border: 3px solid #000;
+    max-width: 57%;
+    margin: 25px auto;
+    h1 {
+      font-size: 50px;
+      font-weight: 600;
+      padding-block: 10px;
+      text-align: center;
+    }
+  }
+  &__content {
+    display: flex;
+    gap: 60px;
+    &_list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+}
