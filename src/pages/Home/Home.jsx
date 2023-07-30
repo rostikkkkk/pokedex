@@ -3,11 +3,14 @@ import PokemonList from "./components/PokemonList/PokemonList";
 import LoadButton from "./components/LoadButton/LoadButton";
 import { useState, useEffect } from "react";
 import { Loading } from "react-loading-dot";
+import PokemonInfo from "./components/PokemonInfo/PokemonInfo.jsx";
 
 const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [offset, setOffset] = useState(0);
+  const [pokemonInfo, setPokemonInfo] = useState(null);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,11 +62,14 @@ const Home = () => {
 
     fetchData();
   }, [offset]);
-
+  console.log(pokemonData);
   const handleLoadMore = () => {
     setOffset((prevOffset) => prevOffset + 12);
   };
-
+  const handlePokemonClick = (pokemon) => {
+    setSelectedPokemon(pokemon);
+  };
+  console.log(pokemonInfo);
   return (
     <div className={styles.home}>
       <div className={styles.home__headline}>
@@ -74,10 +80,15 @@ const Home = () => {
       ) : (
         <div className={styles.home__content}>
           <div className={styles.home__content_list}>
-            <PokemonList pokemonData={pokemonData} />
+            <PokemonList
+              pokemonData={pokemonData}
+              onPokemonClick={handlePokemonClick}
+            />
             <LoadButton onClick={handleLoadMore} />
           </div>
-          <div>details</div>
+          <div className={styles.home__content_info}>
+            {selectedPokemon ? <PokemonInfo data={selectedPokemon} /> : null}
+          </div>
         </div>
       )}
     </div>

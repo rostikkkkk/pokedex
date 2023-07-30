@@ -2,7 +2,7 @@ import styles from "./LoadButton.module.scss";
 
 const LoadButton = ({ onClick }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button onClick={onClick} className={styles.button}>
       Load More
     </button>
   );

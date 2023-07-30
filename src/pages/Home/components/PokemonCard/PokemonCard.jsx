@@ -20,9 +20,12 @@ const typeColors = {
   steel: "#B8B8D0",
   fairy: "#EE99AC",
 };
-const PokemonCard = ({ name, types, imageUrl }) => {
+const PokemonCard = ({ name, types, imageUrl, onReceivePokemon }) => {
+  const handleClick = () => {
+    return console.log(333);
+  };
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onReceivePokemon}>
       <LazyLoad height={165} offset={100}>
         <img className={styles.card__image} src={imageUrl} alt={name} />
       </LazyLoad>

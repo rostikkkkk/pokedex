@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./PokemonList.module.scss";
 import Select from "react-select";
-const PokemonList = ({ pokemonData }) => {
+import LoadButton from "../LoadButton/LoadButton.jsx";
+const PokemonList = ({ pokemonData, onPokemonClick }) => {
   const [selectedType, setSelectedType] = useState(null);
 
   const handleTypeChange = (selectedOption) => {
@@ -20,10 +21,11 @@ const PokemonList = ({ pokemonData }) => {
     );
     return Array.from(allTypes);
   };
+  const allTypes = useMemo(() => getAllTypes(), [pokemonData]);
 
   const options = [
     { value: "all", label: "All Types" },
-    ...getAllTypes().map((type) => ({
+    ...allTypes.map((type) => ({
       value: type,
       label: capitalizeFirstLetter(type),
     })),
@@ -38,7 +40,6 @@ const PokemonList = ({ pokemonData }) => {
     }
     return pokemon.types.some(({ type }) => type.name === selectedType.value);
   });
-
   return (
     <>
       <Select
@@ -49,7 +50,7 @@ const PokemonList = ({ pokemonData }) => {
         className={styles.select}
       />
       <div className={styles.list}>
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} persist>
           {filteredPokemonData.map((pokemon) => (
             <motion.div
               key={pokemon.id}
@@ -62,6 +63,7 @@ const PokemonList = ({ pokemonData }) => {
                 imageUrl={pokemon.sprites?.front_default}
                 name={pokemon.name}
                 types={pokemon.types.map(({ type }) => type.name)}
+                onReceivePokemon={() => onPokemonClick(pokemon)}
               />
             </motion.div>
           ))}

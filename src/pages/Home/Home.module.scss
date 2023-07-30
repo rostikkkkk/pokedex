@@ -16,11 +16,14 @@
   }
   &__content {
     display: flex;
-    gap: 60px;
+    gap: 70px;
     &_list {
       display: flex;
       flex-direction: column;
       gap: 30px;
+    }
+    &_info {
+      margin-block: 32.3%;
     }
   }
 }
