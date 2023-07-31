@@ -21,12 +21,12 @@
 
    ```
 
-4.Inside the project directory run the command:
+4. Inside the project directory run the command:
 
-     ```bash
+    ```bash
     npm install
 
-    ```
+   ```
 
 5. Run the command `vite` on your cmd:  
 
