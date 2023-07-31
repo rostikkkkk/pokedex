@@ -27,9 +27,11 @@
 
 ```
 
-4. Run the command `vite` on your cmd:  ````bash
-    vite
+5. Run the command `vite` on your cmd:  
+
+````bash
+    npm run dev
 
 ```
-5. Go to http://localhost:3000/ on your browser.
+6. Go to http://localhost:3000/ on your browser.
 ```
