@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from "react";
 import styles from "./Home.module.scss";
 import PokemonList from "./components/PokemonList/PokemonList";
 import LoadButton from "./components/LoadButton/LoadButton";
-import { useState, useEffect } from "react";
 import { Loading } from "react-loading-dot";
 import PokemonInfo from "./components/PokemonInfo/PokemonInfo.jsx";
 
@@ -9,13 +9,14 @@ const Home = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [offset, setOffset] = useState(0);
-  const [pokemonInfo, setPokemonInfo] = useState(null);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const limit = 12;
+        setIsLoading(true);
+
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
         );
@@ -52,24 +53,24 @@ const Home = () => {
           );
           return [...prevData, ...uniqueNewData];
         });
-
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching Pokemon data:", error);
+      } finally {
         setIsLoading(false);
       }
     };
 
     fetchData();
   }, [offset]);
-  console.log(pokemonData);
+
   const handleLoadMore = () => {
     setOffset((prevOffset) => prevOffset + 12);
   };
+
   const handlePokemonClick = (pokemon) => {
     setSelectedPokemon(pokemon);
   };
-  console.log(pokemonInfo);
+
   return (
     <div className={styles.home}>
       <div className={styles.home__headline}>
@@ -87,7 +88,7 @@ const Home = () => {
             <LoadButton onClick={handleLoadMore} />
           </div>
           <div className={styles.home__content_info}>
-            {selectedPokemon ? <PokemonInfo data={selectedPokemon} /> : null}
+            {selectedPokemon && <PokemonInfo data={selectedPokemon} />}
           </div>
         </div>
       )}
