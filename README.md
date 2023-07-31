@@ -14,7 +14,22 @@
 
    ```
 
-3. Navigate to the project directory via `cd pokedex` directory and run the command `npm install`
+3. Navigate to the project directory:
 
-4. Run the command `vite` on your cmd.
+```bash
+      cd pokedex
+
+```
+
+4.  Inside the project directory run the command:
+    ````bash
+    npm install
+
+```
+
+4. Run the command `vite` on your cmd:  ````bash
+    vite
+
+```
 5. Go to http://localhost:3000/ on your browser.
+```
