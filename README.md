@@ -28,7 +28,7 @@
 
    ```
 
-5. Run the command `vite` on your cmd:  
+5. Run the command `npm run dev` on your cmd:  
 
     ```bash
     npm run dev
