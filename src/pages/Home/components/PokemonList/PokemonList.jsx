@@ -1,16 +1,20 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PokemonCard from "../PokemonCard/PokemonCard";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./PokemonList.module.scss";
 import Select from "react-select";
 import LoadButton from "../LoadButton/LoadButton.jsx";
-const PokemonList = ({ pokemonData, onPokemonClick }) => {
+const PokemonList = ({ pokemonData, onPokemonClick, loadMoreClicked }) => {
   const [selectedType, setSelectedType] = useState(null);
 
   const handleTypeChange = (selectedOption) => {
     setSelectedType(selectedOption);
   };
-
+  useEffect(() => {
+    if (loadMoreClicked) {
+      setSelectedType(null);
+    }
+  }, [loadMoreClicked]);
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };

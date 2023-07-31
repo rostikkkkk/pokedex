@@ -1,9 +1,9 @@
 import styles from "./LoadButton.module.scss";
 
-const LoadButton = ({ onClick }) => {
+const LoadButton = ({ onClick, isLoading }) => {
   return (
     <button onClick={onClick} className={styles.button}>
-      Load More
+      {isLoading ? "Loading..." : "Load More"}
     </button>
   );
 };
